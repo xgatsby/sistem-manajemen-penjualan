@@ -163,25 +163,54 @@ define('DB_NAME', 'dbphpjual');
 
 ---
 
-## 🌐 Demo Online
+## 🎥 Demo Aplikasi
 
-### 🚀 Website Live Demo
-Aplikasi ini juga tersedia secara online dan dapat diakses melalui:
+### 📱 Screenshot Aplikasi
 
-**🔗 Link Demo:** `https://kelompok6-penjualan.infinityfreeapp.com`
+#### 🏠 Dashboard Utama
+![Dashboard](https://via.placeholder.com/800x400/1ABC9C/FFFFFF?text=Dashboard+Sistem+Manajemen+Penjualan)
+*Dashboard dengan statistik real-time dan navigasi yang user-friendly*
 
-### 🔑 Login Demo
+#### 📦 Halaman Data Barang
+![Data Barang](https://via.placeholder.com/800x400/3498DB/FFFFFF?text=Manajemen+Data+Barang+dengan+CRUD)
+*Manajemen data barang lengkap dengan fitur pencarian dan pagination*
+
+#### 👥 Halaman Data Kasir
+![Data Kasir](https://via.placeholder.com/800x400/E74C3C/FFFFFF?text=Manajemen+Data+Kasir+dengan+Filter)
+*Manajemen data kasir dengan statistik gender dan pencarian multi-field*
+
+### 🚀 Cara Menjalankan untuk Demo
+
+#### Opsi 1: Local Development
+```bash
+# 1. Clone repository
+git clone https://github.com/xgatsby/sistem-manajemen-penjualan.git
+
+# 2. Pindahkan ke htdocs (XAMPP) atau www (WAMP)
+# 3. Import database dari database/dbphpjual.sql
+# 4. Akses: http://localhost/sistem-manajemen-penjualan/
+```
+
+#### Opsi 2: Download ZIP
+1. Klik tombol **"Code"** → **"Download ZIP"** di GitHub
+2. Extract ke folder `htdocs` (XAMPP) atau `www` (WAMP)
+3. Import database dari `database/dbphpjual.sql` ke phpMyAdmin
+4. Akses via browser: `http://localhost/sistem-manajemen-penjualan/`
+
+### 🔑 Informasi Login
 - **Username:** `admin`
 - **Password:** `admin`
 
-### 📱 Fitur yang Dapat Dicoba
-- ✅ **Dashboard Interaktif** - Statistik real-time
-- ✅ **Manajemen Barang** - CRUD lengkap dengan pencarian
-- ✅ **Manajemen Kasir** - CRUD lengkap dengan filter
-- ✅ **Responsive Design** - Optimal di desktop, tablet, dan mobile
-- ✅ **Modern UI/UX** - Antarmuka yang user-friendly
+### ✨ Fitur Utama yang Dapat Didemonstrasikan
+- 🏠 **Dashboard Interaktif** - Statistik total barang, kasir, dan stok
+- 📦 **CRUD Barang** - Tambah, edit, hapus, dan pencarian data barang
+- 👥 **CRUD Kasir** - Manajemen data kasir dengan filter gender
+- 🔍 **Pencarian & Filter** - Sistem pencarian yang responsif
+- 📄 **Pagination** - Navigasi data dengan pembatasan per halaman
+- 📱 **Responsive Design** - Tampilan optimal di desktop, tablet, dan mobile
+- 🎨 **Modern UI/UX** - Antarmuka yang clean dan user-friendly
 
-> 🎓 **Untuk Dosen:** Website dapat diakses 24/7 untuk evaluasi dan testing semua fitur aplikasi
+> 🎓 **Untuk Pak Han Sulaiman:** Aplikasi dapat dijalankan secara lokal untuk evaluasi lengkap semua fitur
 
 ---
 
@@ -265,6 +294,35 @@ Proyek ini dibuat untuk keperluan akademik di **Universitas Indraprasta PGRI Jak
 
 **🎓 Dibuat dengan ❤️ oleh Kelompok 6**  
 **Teknik Informatika - Universitas Indraprasta PGRI Jakarta**
+
+### 📋 Panduan Khusus untuk Dosen
+
+**Pak Han Sulaiman** dapat mengevaluasi proyek ini dengan cara:
+
+#### 🔗 **Melihat Source Code:**
+- Repository GitHub: https://github.com/xgatsby/sistem-manajemen-penjualan
+- Semua file source code tersedia untuk review
+
+#### 💻 **Menjalankan Aplikasi Lokal:**
+1. Download ZIP dari GitHub atau clone repository
+2. Extract ke folder `htdocs` (XAMPP) atau `www` (WAMP)
+3. Import database dari `database/dbphpjual.sql`
+4. Akses: `http://localhost/sistem-manajemen-penjualan/`
+5. Login: `admin` / `admin`
+
+#### 📱 **Testing Fitur:**
+- Dashboard dengan statistik real-time
+- CRUD lengkap untuk barang dan kasir
+- Pencarian dan filter data
+- Responsive design di berbagai device
+- Modern UI/UX dengan animasi
+
+#### 📊 **Evaluasi Teknis:**
+- Struktur kode yang terorganisir
+- Keamanan input validation
+- Database design yang normalized
+- CSS modern dengan custom properties
+- Git history yang profesional
 
 [![GitHub](https://img.shields.io/badge/GitHub-xgatsby-181717?style=for-the-badge&logo=github)](https://github.com/xgatsby)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
