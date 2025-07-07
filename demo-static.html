@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Sistem Manajemen Penjualan - Kelompok 6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            background: #1ABC9C;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1ABC9C, #16A085);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .data-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 2px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: #1ABC9C;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: #1ABC9C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .demo-info {
+            background: #e8f5e8;
+            border: 1px solid #1ABC9C;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-info h3 {
+            color: #1ABC9C;
+            margin-bottom: 10px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-list li:before {
+            content: "✅ ";
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 Sistem Manajemen Penjualan</h1>
+            <p><strong>Demo Interaktif - Kelompok 6 Teknik Informatika</strong></p>
+            <p>Universitas Indraprasta PGRI Jakarta</p>
+        </div>
+        
+        <div class="demo-info">
+            <h3>📋 Informasi Demo</h3>
+            <p><strong>Dosen:</strong> Han Sulaiman</p>
+            <p><strong>Mata Kuliah:</strong> Pemrograman Web</p>
+            <p><strong>Tim:</strong> Rizki Ramadhan Lubis (202243500763), Vicry Putra Mahendra (202243501638)</p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/xgatsby/sistem-manajemen-penjualan" target="_blank">https://github.com/xgatsby/sistem-manajemen-penjualan</a></p>
+        </div>
+        
+        <!-- Login Page -->
+        <div id="loginPage" class="demo-section">
+            <div class="login-form">
+                <h2 style="text-align: center; margin-bottom: 30px;">🔐 Login Sistem</h2>
+                <form onsubmit="login(event)">
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input type="text" id="username" value="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" id="password" value="admin" required>
+                    </div>
+                    <button type="submit" class="btn-login">Login</button>
+                </form>
+                <div style="margin-top: 20px; text-align: center; color: #666;">
+                    <small>Demo Login: admin / admin</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Application -->
+        <div id="mainApp" class="demo-section" style="display: none;">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+                <button class="nav-tab" onclick="showTab('barang')">📦 Data Barang</button>
+                <button class="nav-tab" onclick="showTab('kasir')">👥 Data Kasir</button>
+            </div>
+            
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2>📊 Dashboard Sistem</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Total Barang</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Total Kasir</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">Stok Tersedia</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Stok Menipis</div>
+                    </div>
+                </div>
+                
+                <h3>🎯 Fitur Utama Sistem</h3>
+                <ul class="feature-list">
+                    <li>Manajemen Data Barang (CRUD Lengkap)</li>
+                    <li>Manajemen Data Kasir (CRUD Lengkap)</li>
+                    <li>Pencarian dan Filter Data Real-time</li>
+                    <li>Dashboard Statistik Interaktif</li>
+                    <li>Responsive Design untuk Semua Device</li>
+                    <li>Modern UI/UX dengan Animasi</li>
+                    <li>Sistem Keamanan Login</li>
+                    <li>Database MySQL Terintegrasi</li>
+                </ul>
+            </div>
+            
+            <!-- Data Barang Tab -->
+            <div id="barang" class="tab-content">
+                <h2>📦 Manajemen Data Barang</h2>
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-primary" onclick="alert('Fitur Tambah Barang - Dalam aplikasi asli akan membuka form tambah data')">➕ Tambah Barang</button>
+                </div>
+                
+                <input type="text" class="search-box" placeholder="🔍 Cari barang..." onkeyup="searchTable('barangTable', this.value)">
+                
+                <table class="data-table" id="barangTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Barang</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BRG001</td>
+                            <td>Laptop ASUS ROG</td>
+                            <td>Rp 15.000.000</td>
+                            <td>5</td>
+                            <td><span style="color: green;">✅ Tersedia</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Barang - Dalam aplikasi asli akan membuka form edit')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Barang - Dalam aplikasi asli akan konfirmasi hapus')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BRG002</td>
+                            <td>Mouse Gaming Logitech</td>
+                            <td>Rp 750.000</td>
+                            <td>15</td>
+                            <td><span style="color: green;">✅ Tersedia</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Barang')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Barang')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BRG003</td>
+                            <td>Keyboard Mechanical</td>
+                            <td>Rp 1.200.000</td>
+                            <td>2</td>
+                            <td><span style="color: orange;">⚠️ Stok Menipis</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Barang')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Barang')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BRG004</td>
+                            <td>Monitor 4K Samsung</td>
+                            <td>Rp 8.500.000</td>
+                            <td>8</td>
+                            <td><span style="color: green;">✅ Tersedia</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Barang')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Barang')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BRG005</td>
+                            <td>Headset Gaming</td>
+                            <td>Rp 950.000</td>
+                            <td>12</td>
+                            <td><span style="color: green;">✅ Tersedia</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Barang')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Barang')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Data Kasir Tab -->
+            <div id="kasir" class="tab-content">
+                <h2>👥 Manajemen Data Kasir</h2>
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-primary" onclick="alert('Fitur Tambah Kasir - Dalam aplikasi asli akan membuka form tambah data')">➕ Tambah Kasir</button>
+                </div>
+                
+                <input type="text" class="search-box" placeholder="🔍 Cari kasir..." onkeyup="searchTable('kasirTable', this.value)">
+                
+                <table class="data-table" id="kasirTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Kasir</th>
+                            <th>Email</th>
+                            <th>No. HP</th>
+                            <th>Gender</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>KSR001</td>
+                            <td>Siti Nurhaliza</td>
+                            <td>siti@email.com</td>
+                            <td>081234567890</td>
+                            <td>👩 Perempuan</td>
+                            <td><span style="color: green;">✅ Aktif</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Kasir - Dalam aplikasi asli akan membuka form edit')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Kasir - Dalam aplikasi asli akan konfirmasi hapus')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>KSR002</td>
+                            <td>Ahmad Fauzi</td>
+                            <td>ahmad@email.com</td>
+                            <td>081234567891</td>
+                            <td>👨 Laki-laki</td>
+                            <td><span style="color: green;">✅ Aktif</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Kasir')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Kasir')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>KSR003</td>
+                            <td>Maya Sari</td>
+                            <td>maya@email.com</td>
+                            <td>081234567892</td>
+                            <td>👩 Perempuan</td>
+                            <td><span style="color: green;">✅ Aktif</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Kasir')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Kasir')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>KSR004</td>
+                            <td>Budi Santoso</td>
+                            <td>budi@email.com</td>
+                            <td>081234567893</td>
+                            <td>👨 Laki-laki</td>
+                            <td><span style="color: orange;">⏸️ Non-Aktif</span></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="alert('Edit Kasir')">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="alert('Hapus Kasir')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <p><strong>🎯 Demo Interaktif Sistem Manajemen Penjualan</strong></p>
+                <p>Kelompok 6 - Teknik Informatika - Universitas Indraprasta PGRI Jakarta</p>
+                <p><a href="https://github.com/xgatsby/sistem-manajemen-penjualan" target="_blank">📂 Source Code GitHub</a></p>
+                <button class="btn btn-danger" onclick="logout()" style="margin-top: 10px;">🚪 Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'admin') {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                alert('✅ Login berhasil! Selamat datang di Sistem Manajemen Penjualan');
+            } else {
+                alert('❌ Username atau password salah!');
+            }
+        }
+        
+        function logout() {
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('username').value = 'admin';
+            document.getElementById('password').value = 'admin';
+            alert('🚪 Anda telah logout dari sistem');
+        }
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+        
+        function searchTable(tableId, searchValue) {
+            const table = document.getElementById(tableId);
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+                let found = false;
+                
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].textContent.toLowerCase().includes(searchValue.toLowerCase())) {
+                        found = true;
+                        break;
+                    }
+                }
+                
+                row.style.display = found ? '' : 'none';
+            }
+        }
+        
+        // Auto-focus on username field
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('username').focus();
+        });
+    </script>
+</body>
+</html>
