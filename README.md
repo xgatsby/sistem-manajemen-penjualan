@@ -163,6 +163,28 @@ define('DB_NAME', 'dbphpjual');
 
 ---
 
+## 🌐 Demo Online
+
+### 🚀 Website Live Demo
+Aplikasi ini juga tersedia secara online dan dapat diakses melalui:
+
+**🔗 Link Demo:** `https://kelompok6-penjualan.infinityfreeapp.com`
+
+### 🔑 Login Demo
+- **Username:** `admin`
+- **Password:** `admin`
+
+### 📱 Fitur yang Dapat Dicoba
+- ✅ **Dashboard Interaktif** - Statistik real-time
+- ✅ **Manajemen Barang** - CRUD lengkap dengan pencarian
+- ✅ **Manajemen Kasir** - CRUD lengkap dengan filter
+- ✅ **Responsive Design** - Optimal di desktop, tablet, dan mobile
+- ✅ **Modern UI/UX** - Antarmuka yang user-friendly
+
+> 🎓 **Untuk Dosen:** Website dapat diakses 24/7 untuk evaluasi dan testing semua fitur aplikasi
+
+---
+
 ## Struktur Database
 
 ### Tabel `barang`
